@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Formulario - Gastos de Envío -->
+        <record id="stock_landed_cost_form_inherit" model="ir.ui.view">
+            <field name="name">stock.landed.cost.form.inherit</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_move_id']" position="after">
+                    <field name="currency_id"/>
+                    <field name="other_currency" invisible="1"/>
+                    <field name="exchange_date" attrs="{'readonly':[('state','not in',['draft'])],'invisible':['|',('other_currency', '!=', True),('user_exchange_rate', '=', True)],'required':[('other_currency', '=', True),('user_exchange_rate', '=', False)]}" groups="base.group_multi_currency"/>
+                    <field name="user_exchange_rate" attrs="{'readonly':[('state','not in',['draft'])],'invisible':[('other_currency', '!=', True)]}" groups="base.group_multi_currency"/>
+                    <field name="exchange_rate" force_save="1" attrs="{'readonly':['|',('state','not in',['draft']),('user_exchange_rate', '!=', True)],'invisible':[('other_currency', '!=', True)]}" groups="base.group_multi_currency"/>
+                </xpath>
+                <xpath expr="//field[@name='valuation_adjustment_lines']/tree[1]/field[@name='additional_landed_cost']" position="after">
+                    <!--                    <field name="other_currency" invisible="1"/>-->
+                    <field name="original_currency_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="additional_landed_cost_final"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+#. module: opt_landed_cost
+#: model:ir.model.fields,field_description:opt_landed_cost.field_stock_valuation_adjustment_lines__additional_landed_cost_final
+msgid "Additional Landed Cost Final"
+msgstr "Costo de aterrizaje adicional final"
